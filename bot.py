@@ -16,19 +16,18 @@ from telegram.ext import (
     filters,
 )
 
-BOT_TOKEN = "7595270809:AAFI_UAqGLLDhW6g6x1shXFK2NM5f5uSwc0"
-MONGO_URI = "mongodb+srv://airtel2400000:1mecSTZJXT9pnoEb@cluster132.3ayfbbz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster132"
-DELETE_PASS = "143143"
-SUPER_ADMIN_ID = 6127512234  # 👿👿👿👿👿👿❤‍🔥Super Admin❤‍🔥👿👿👿👿👿👿👿
-
-ADMIN_IDS = [7045858363, 6127512234] # 😟normal admin😟
+BOT_TOKEN = os.getenv("7595270809:AAFI_UAqGLLDhW6g6x1shXFK2NM5f5uSwc0")
+MONGO_URI = os.getenv("mongodb+srv://airtel2400000:1mecSTZJXT9pnoEb@cluster132.3ayfbbz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster132")
+DELETE_PASS = os.getenv("DELETE_PASS", "143143")  # default rakha hai
+SUPER_ADMIN_ID = int(os.getenv("SUPER_ADMIN_ID", "6127512234"))     # 👿👿👿👿👿👿❤‍🔥Super Admin❤‍🔥👿👿👿👿👿👿👿
+ADMIN_IDS = [7045858363, 6127512234]    # 😟normal admin😟
 
 
 db_available = True
 try:
     mongo = MongoClient(
         MONGO_URI,
-        serverSelectionTimeoutMS=4000,
+        serverSelectionTimeoutMS=10000,
         tls=True,
         tlsAllowInvalidCertificates=False,
         tlsCAFile=certifi.where()
