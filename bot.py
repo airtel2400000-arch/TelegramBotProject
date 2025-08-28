@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv   # 👈 dotenv import kiya
+
 import asyncio
 from datetime import datetime, timedelta, time
 from pymongo import MongoClient
@@ -16,12 +19,18 @@ from telegram.ext import (
     filters,
 )
 
-BOT_TOKEN = os.getenv("8393146940:AAF00SHhs4Nr9j5S5eyZA1CKD6tjJ0TSMwo")
-MONGO_URI = os.getenv("mongodb+srv://airtel2400000:1mecSTZJXT9pnoEb@cluster132.3ayfbbz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster132")
-DELETE_PASS = os.getenv("DELETE_PASS", "143143")  # default rakha hai
-SUPER_ADMIN_ID = int(os.getenv("SUPER_ADMIN_ID", "6127512234"))     # 👿👿👿👿👿👿❤‍🔥Super Admin❤‍🔥👿👿👿👿👿👿👿
-ADMIN_IDS = [7045858363, 6127512234]    # 😟normal admin😟
+# 👇 .env file ko load karne ke liye
+load_dotenv()
 
+# ✅ Debugging ke liye print
+print("Loaded BOT_TOKEN:", os.getenv("BOT_TOKEN"))
+print("Loaded MONGO_URI:", os.getenv("MONGO_URI"))
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")        # ✅ Env variable se token lo
+MONGO_URI = os.getenv("MONGO_URI")
+DELETE_PASS = os.getenv("DELETE_PASS", "143143")
+SUPER_ADMIN_ID = int(os.getenv("SUPER_ADMIN_ID", "8367405986"))
+ADMIN_IDS = [7045858363, 6127512234]  # 😟normal admin😟
 
 db_available = True
 try:
@@ -32,11 +41,12 @@ try:
         tlsAllowInvalidCertificates=False,
         tlsCAFile=certifi.where()
     )
+
     mongo.admin.command("ping")
     db = mongo["apkdata"]
     collection = db["purchases"]
     activity_logs = db["activity_logs"]
-    admins_collection = db["admins"]  # For admin management
+    admins_collection = db["admins"]
 except Exception as e:
     print("⚠ MongoDB connect fail:", e)
     db_available = False
