@@ -4,4 +4,4 @@ dnspython==2.6.1
 certifi==2024.7.4
 apscheduler==3.10.4
 gunicorn==21.2.0
-python-dotenv==1.0.1   # 👈 यह नया add किया
+python-dotenv==1.0.1
